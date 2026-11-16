@@ -1,0 +1,149 @@
+/* MOBILE FIRST: los estilos base son para móvil (una columna).
+   Las media queries solo AÑADEN mejoras al haber más espacio. */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  --azul-oscuro: #203d73;
+  --azul-nav: #34508a;   /* contraste con blanco ≈ 8:1 */
+  --azul-boton: #1d4f91; /* contraste con blanco ≈ 8:1 */
+  --texto: #222;
+  --fondo: #f4f4f4;
+  --espacio: 16px;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  font-size: 1rem;          /* 16 px: legible sin zoom */
+  line-height: 1.5;
+  background: var(--fondo);
+  color: var(--texto);
+}
+
+/* ---------- Cabecera y navegación (Flexbox) ---------- */
+header {
+  background: var(--azul-oscuro);
+  color: #fff;
+  padding: var(--espacio);
+}
+header h1 { margin: 0; font-size: 1.5rem; }
+
+nav {
+  display: flex;
+  flex-wrap: wrap;          /* si no caben, bajan de línea: no desbordan */
+  gap: 8px;
+  margin-top: 12px;
+}
+nav a {
+  flex: 1 1 auto;           /* en móvil se reparten el ancho */
+  min-height: 44px;         /* objetivo táctil recomendado */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  color: #fff;
+  background: var(--azul-nav);
+  text-decoration: none;
+  border-radius: 6px;
+}
+nav a:hover { background: #4666ad; }
+
+/* ---------- Contenido ---------- */
+main {
+  width: 100%;
+  max-width: 1100px;        /* antes: width fijo de 1100px (causaba scroll horizontal) */
+  margin: 0 auto;
+  padding: var(--espacio);
+}
+h2 { font-size: 1.5rem; margin: 24px 0 8px; }
+
+/* ---------- Catálogo (Grid): 1 columna en móvil ---------- */
+.productos {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--espacio);
+}
+.tarjeta {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: var(--espacio);
+  min-width: 0;
+  transition: border-color .2s, box-shadow .2s;
+}
+.tarjeta h3 { margin: 12px 0 4px; }
+.precio { margin: 0 0 12px; font-size: 1.25rem; font-weight: bold; }
+
+.foto {
+  height: 135px;
+  background: #dce7f6;
+  display: grid;
+  place-items: center;
+  font-size: 46px;
+  border-radius: 6px;
+}
+
+/* ---------- Controles ---------- */
+button {
+  width: 100%;              /* botón cómodo de tocar en móvil */
+  min-height: 44px;
+  padding: 10px 16px;
+  font-size: 1rem;
+  background: var(--azul-boton);
+  color: #fff;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+}
+button:hover { background: #163f75; }
+
+/* Foco visible para quien navega con teclado */
+a:focus-visible, button:focus-visible {
+  outline: 3px solid #ffbf47;
+  outline-offset: 2px;
+}
+
+/* ---------- Retroalimentación al agregar (R7) ---------- */
+.tarjeta.agregada {
+  border-color: #1b7a3d;
+  box-shadow: 0 0 0 2px #1b7a3d;
+}
+.tarjeta.agregada button { background: #1b7a3d; }
+
+#estado { margin: var(--espacio) 0 0; }
+#estado.visible {
+  padding: 10px 14px;
+  background: #e3f4e8;
+  color: #14502a;           /* contraste alto sobre fondo verde claro */
+  border-left: 4px solid #1b7a3d;
+  border-radius: 4px;
+}
+
+footer {
+  text-align: center;
+  padding: 20px var(--espacio);
+  background: var(--azul-oscuro);
+  color: #fff;
+  margin-top: 30px;
+}
+
+/* ---------- Tablet (≥ 768 px): 2 columnas ---------- */
+@media (min-width: 48em) {
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 32px;
+  }
+  nav { margin-top: 0; }
+  nav a { flex: 0 0 auto; }
+  main { padding: 24px 32px; }
+  .productos { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  h2 { font-size: 1.75rem; }
+}
+
+/* ---------- Escritorio (≥ 1024 px): 3 columnas ---------- */
+@media (min-width: 64em) {
+  .productos { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+}
