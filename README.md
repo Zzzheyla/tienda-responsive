@@ -1,5 +1,7 @@
 # Tienda Aula — Reto responsive
 
+🔗 **Ver en vivo:** https://zzzheyla.github.io/tienda-responsive/
+
 Taller de transformación responsive (Clase 2). Se partió de una interfaz de tienda deliberadamente poco adaptable y se convirtió a diseño **Mobile First** conservando HTML semántico y principios HCI.
 
 ## Estructura
